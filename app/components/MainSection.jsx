@@ -9,11 +9,9 @@ class MainSection extends Component{
   render() {
     const { notes, actions } = this.props;
     return (
-      <section className="main">
+      <section className="main container">
         <ul className="task-list">
-            {notes.map((note) => {
-              return (<TaskItem key={note.id} note={note} {...actions} />);
-            })}
+            {notes.map(note=> <TaskItem key={note.id} note={note} {...actions} />)}
         </ul>
       </section>
     )

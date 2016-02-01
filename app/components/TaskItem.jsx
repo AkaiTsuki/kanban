@@ -6,10 +6,19 @@ class TaskItem extends Component{
   }
 
   render(){
-    const {note} = this.props;
+    const {note, actions} = this.props;
 
-    return <li>{note.task}</li>;
+    return (
+      <li>
+        <span>{note.task}</span>
+        <button onClick={this.deleteNote} >X</button>
+      </li>
+      );
   }
+
+  deleteNote = () => {
+    this.props.deleteNote(this.props.note.id);
+  };
 }
 
 
