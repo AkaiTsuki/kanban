@@ -1,5 +1,71 @@
 
+html, body {
+  height: 100%;
+}
 
-body {
-  background: cornsilk;
+.container, .row{
+  height: 100%;
+}
+
+.lane {
+  padding: 0;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
+}
+
+.lane-title {
+  margin: 0px;
+  text-align: center;
+  padding: .5em;
+  color: white;
+}
+
+.lane-title span{
+  cursor: pointer;
+}
+
+.lane-task-list{
+  list-style: none;
+  padding: 0;
+}
+
+.bg-turquoise {
+  background-color: #1ABC9C;
+}
+
+.bg-wet-asphalt{
+  background-color: #34495E;
+}
+
+.bg-peter-river{
+  background-color: #3498DB;
+}
+
+.bg-emerald {
+  background-color: #2ECC71;
+}
+
+.task {
+  color:white;
+  min-height: 50px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 12pt;
+}
+
+.task-content{
+    padding-bottom: 5px;
+}
+
+.task-tool-bar{
+  padding-top: 5px;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  font-size: .8em;
+}
+
+.task-tool-bar span:hover{
+  cursor: pointer;
 }
