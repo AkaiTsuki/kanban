@@ -18,3 +18,12 @@ export function deleteTask(target, id) {
     id
   };
 }
+
+export function updateTask(target, id, job){
+  return {
+    type: ActionType.UPDATE_TASK,
+    target,
+    id,
+    job
+  };
+}
