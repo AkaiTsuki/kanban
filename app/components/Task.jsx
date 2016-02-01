@@ -14,7 +14,7 @@ class Task extends Component{
     return (
       <li className={"task "+ bgStyle}>
         {this.state.isEditing ?
-          <input onBlur={this.updateTask} autoFocus={true} defaultValue={task.job} /> :
+          (<div className="form-group"><textarea className="form-control" rows="5" onBlur={this.updateTask} autoFocus={true} defaultValue={task.job} ></textarea></div>) :
             <div onClick={this.edit} className="task-content">{task.job}</div> }
         <div className="task-tool-bar">
           <span onClick={this.deleteTask} className="glyphicon glyphicon-trash"></span>
