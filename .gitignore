@@ -48,3 +48,7 @@ Temporary Items
 
 # Node
 node_modules
+
+# idea
+*.iml
+.idea
