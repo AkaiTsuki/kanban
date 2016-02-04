@@ -49,12 +49,30 @@ function boadReducer(state = {}, action){
   }
 }
 
-function loadingReducer(state = true, action){
+const initLoadingState = {
+  backlog: false,
+  open: false,
+  inProcess: false,
+  done: false
+};
+
+function loadingReducer(state = initLoadingState, action){
+
   switch (action.type) {
     case REQUEST_DATA:
-      return true;
+      return Object.assign({}, state, {
+        backlog: true,
+        open: true,
+        inProcess: true,
+        done: true
+      });
     case RECEIVE_DATA:
-      return false;
+    return Object.assign({}, state, {
+      backlog: false,
+      open: false,
+      inProcess: false,
+      done: false
+    });
     default:
       return state;
   }

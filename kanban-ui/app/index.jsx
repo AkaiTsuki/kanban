@@ -17,8 +17,17 @@ import KanbanReducer from './reducers/KanbanReducer'
 import App from './containers/App.jsx'
 
 
-const loggerMiddleware = createLogger()
-const store = createStore(KanbanReducer, {isLoading: true, board: {}}, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const loggerMiddleware = createLogger();
+const initState = {
+  isLoading : {
+    backlog: true,
+    open: true,
+    inProcess: true,
+    done: true
+  },
+  board: {}
+};
+const store = createStore(KanbanReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 render(
   <Provider store={store}>

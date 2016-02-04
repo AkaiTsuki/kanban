@@ -8,7 +8,7 @@ class App extends React.Component {
   render() {
     const {isLoading, board, actions} = this.props;
     return (
-        isLoading ? <h1>Loading ...</h1> : <Board board={board} actions={actions} />
+        <Board board={board} isLoading={isLoading} actions={actions} />
     );
   }
 

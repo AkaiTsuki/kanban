@@ -7,17 +7,18 @@ class Lane extends Component{
   }
 
   render() {
-    const {laneId, title, titleBgColor, tasks, actions } = this.props;
+    const {laneId, isLoading, lane, titleBgColor, actions } = this.props;
     return (
       <div className="col-md-3 fill">
         <div className="lane">
           <h3 className={'lane-title ' + titleBgColor}>
-            {title}
+            {laneId}
             <span onClick={this.addNewTask} className="glyphicon glyphicon-plus pull-right"></span>
           </h3>
-          <ul className="lane-task-list">
-            {tasks.map(task => <Task laneId={laneId} key={task.id} task={task} bgStyle={titleBgColor} {...actions} />)}
-          </ul>
+          {isLoading ? <div><span className={isLoading ? "glyphicon glyphicon-refresh glyphicon-refresh-animate pull-left" : "hidden"}></span>Loading ...</div> :
+          (<ul className="lane-task-list">
+            {lane.tasks.map(task => <Task laneId={laneId} key={task.id} task={task} bgStyle={titleBgColor} {...actions} />)}
+          </ul>)}
         </div>
       </div>
     )
