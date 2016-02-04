@@ -49,8 +49,9 @@ var board = {
 /* GET users listing. */
 router.get('/board', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-
-  res.json(board);
+  setTimeout(function(){
+      res.json(board);
+  }, 3000);
 });
 
 router.post('/board', function(req, res, next){
@@ -60,7 +61,9 @@ router.post('/board', function(req, res, next){
   newTask.id = uuid.v4();
   var target = req.body.target;
   board[target].tasks.push(newTask);
-  res.json(board);
+  setTimeout(function(){
+      res.json(board);
+  }, 3000);
 });
 
 module.exports = router;

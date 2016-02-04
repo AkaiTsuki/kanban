@@ -12,13 +12,11 @@ class Lane extends Component{
       <div className="col-md-3 fill">
         <div className="lane">
           <h3 className={'lane-title ' + titleBgColor}>
-            {laneId}
+            {this.renderLoading()}
+            {lane.title}
             <span onClick={this.addNewTask} className="glyphicon glyphicon-plus pull-right"></span>
           </h3>
-          {isLoading ? <div><span className={isLoading ? "glyphicon glyphicon-refresh glyphicon-refresh-animate pull-left" : "hidden"}></span>Loading ...</div> :
-          (<ul className="lane-task-list">
-            {lane.tasks.map(task => <Task laneId={laneId} key={task.id} task={task} bgStyle={titleBgColor} {...actions} />)}
-          </ul>)}
+          {this.renderTaskList()}
         </div>
       </div>
     )
@@ -27,6 +25,18 @@ class Lane extends Component{
   addNewTask = () => {
     console.log("Lane: add new task to "+ this.props.laneId);
     this.props.actions.createTask(this.props.laneId);
+  };
+
+  renderTaskList = () => {
+    const {laneId, titleBgColor, lane, actions} = this.props;
+    return (<ul className="lane-task-list">
+      {lane.tasks.map(task => <Task laneId={laneId} key={task.id} task={task} bgStyle={titleBgColor} {...actions} />)}
+    </ul>)
+  };
+
+  renderLoading = () => {
+    const {isLoading} = this.props;
+    return (<i className={isLoading? "fa fa-spinner fa-spin pull-left" : 'hidden'}></i>)
   };
 }
 

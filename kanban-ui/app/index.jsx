@@ -25,7 +25,24 @@ const initState = {
     inProcess: true,
     done: true
   },
-  board: {}
+  board: {
+    backlog: {
+      title: "BackLog",
+      tasks: []
+    },
+    open: {
+      title: "Open",
+      tasks: []
+    },
+    inProcess: {
+      title: "In Process",
+      tasks: []
+    },
+    done: {
+      title: "Done",
+      tasks: []
+    }
+  }
 };
 const store = createStore(KanbanReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
