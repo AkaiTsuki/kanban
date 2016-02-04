@@ -27,3 +27,23 @@ export function updateTask(target, id, job){
     job
   };
 }
+
+export function requestData(){
+  return {
+    type: ActionType.REQUEST_DATA
+  };
+}
+
+export function receiveData(json){
+  return {
+    type: ActionType.RECEIVE_DATA,
+    json
+  }
+}
+
+export function fetchData(){
+  return (dispatch,state) => {
+    dispatch(requestData());
+    return fetch('http://localhost:3000/api/board').then(req => req.json()).then(json => dispatch(receiveData(json)));
+  };
+}

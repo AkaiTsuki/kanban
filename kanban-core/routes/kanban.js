@@ -48,6 +48,8 @@ var board = {
 
 /* GET users listing. */
 router.get('/board', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+
   res.json(board);
 });
 

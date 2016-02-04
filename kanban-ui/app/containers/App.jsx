@@ -6,22 +6,29 @@ import Board from '../components/Board.jsx';
 
 class App extends React.Component {
   render() {
-    const {board, actions} = this.props;
+    const {isLoading, board, actions} = this.props;
     return (
-        <Board board={board} actions={actions} />
+        isLoading ? <h1>Loading ...</h1> : <Board board={board} actions={actions} />
     );
+  }
+
+  componentDidMount() {
+    const { dispatch, board, actions } = this.props
+    dispatch(KanbanAction.fetchData())
   }
 }
 
 function mapStateToProps(state) {
   return {
-    board: state
+    isLoading: state.isLoading,
+    board: state.board
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(KanbanAction, dispatch)
+    actions: bindActionCreators(KanbanAction, dispatch),
+    dispatch
   }
 }
 

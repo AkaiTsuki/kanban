@@ -9,7 +9,9 @@ import './main.css';
 import uuid from 'node-uuid';
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 import { Provider } from 'react-redux'
 import KanbanReducer from './reducers/KanbanReducer'
 import App from './containers/App.jsx'
@@ -57,7 +59,8 @@ const initState = {
   }
 };
 
-const store = createStore(KanbanReducer, initState);
+const loggerMiddleware = createLogger()
+const store = createStore(KanbanReducer, {isLoading: true}, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 render(
   <Provider store={store}>
