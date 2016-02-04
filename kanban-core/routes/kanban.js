@@ -53,4 +53,14 @@ router.get('/board', function(req, res, next) {
   res.json(board);
 });
 
+router.post('/board', function(req, res, next){
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  console.log(req.body);
+  var newTask = req.body.task;
+  newTask.id = uuid.v4();
+  var target = req.body.target;
+  board[target].tasks.push(newTask);
+  res.json(board);
+});
+
 module.exports = router;

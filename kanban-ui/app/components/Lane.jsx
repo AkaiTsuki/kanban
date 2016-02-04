@@ -25,7 +25,7 @@ class Lane extends Component{
 
   addNewTask = () => {
     console.log("Lane: add new task to "+ this.props.laneId);
-    this.props.actions.addTask(this.props.laneId);
+    this.props.actions.createTask(this.props.laneId);
   };
 }
 
