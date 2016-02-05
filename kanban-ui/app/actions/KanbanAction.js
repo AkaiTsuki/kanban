@@ -3,14 +3,14 @@ import fetch from 'isomorphic-fetch';
 
 export function requestAddTask(target) {
   return {
-    type: ActionType.REQ_ADD_TASK,
+    type: ActionType.REQUEST_ADD_TASK,
     target
   }
 }
 
 export function responseAddTask(json, target){
   return {
-    type: ActionType.RES_ADD_TASK,
+    type: ActionType.RECEIVE_ADD_TASK,
     target,
     json
   }
@@ -58,9 +58,16 @@ export function createTask(laneId){
     dispatch(requestAddTask(laneId));
     var body = JSON.stringify({target: laneId, task: {job: "new job"}});
     var headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     };
     return fetch('http://localhost:3000/api/board', {method: 'POST', headers: headers, body: body}).then(res=>res.json()).then(json=>dispatch(responseAddTask(json, laneId)));
   };
 }
+
+// export function updateTask(laneId, taskId, text){
+//   return (dispatch, state) => {
+//     dispatch(requestUpdateTask(laneId, taskId));
+//
+//   }
+// }

@@ -7,9 +7,8 @@ import Cover from '../components/Cover.jsx';
 
 class App extends React.Component {
   render() {
-    const {isLoading, isInit, board, actions} = this.props;
-    // return this.renderContainer(isLoading, isInit, board, actions);
-    return this.renderContainer(isLoading, isInit, board, actions);
+    const {isLoading, initialized, board, actions} = this.props;
+    return this.renderContainer(isLoading, initialized, board, actions);
   }
 
   componentDidMount() {
@@ -17,8 +16,8 @@ class App extends React.Component {
     dispatch(KanbanAction.loadBoard())
   }
 
-  renderContainer = (isLoading, isInit, board, actions) => {
-    if(isInit){
+  renderContainer = (isLoading, initialized, board, actions) => {
+    if(!initialized){
       console.log("Render loading cover")
       return this.renderCover()
     } else {
@@ -30,7 +29,7 @@ class App extends React.Component {
   renderBoard = (isLoading, board, actions) => {
     return (
       <div className="container-fluid" >
-        <Board board={board} isLoading={isLoading} actions={actions} />\
+        <Board board={board} isLoading={isLoading} actions={actions} />
       </div>
     )
   };
@@ -44,7 +43,7 @@ function mapStateToProps(state) {
   return {
     isLoading: state.isLoading,
     board: state.board,
-    isInit: state.isInit
+    initialized: state.initialized
   }
 }
 

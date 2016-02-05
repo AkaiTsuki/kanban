@@ -3,9 +3,9 @@ import { REQUEST_BOARD, RECEIVE_BOARD} from '../constants/KanbanActionType';
 export default function initReducer(state = true, action){
   switch (action.type){
     case REQUEST_BOARD:
-      return true;
+      return false;
     case RECEIVE_BOARD:
-      return false
+      return true
     default:
       return state
   }

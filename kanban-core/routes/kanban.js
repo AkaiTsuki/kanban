@@ -50,24 +50,25 @@ function addNewTask(req){
   newTask.id = uuid.v4();
   var target = req.target;
   board[target].tasks.unshift(newTask);
+  return newTask;
 }
 
 /* GET users listing. */
 router.get('/board', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   setTimeout(function(){
       res.json(board);
-  }, 5000);
+  }, 100);
 });
 
 router.post('/board', function(req, res, next){
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-
   setTimeout(function(){
+    res.setHeader('Access-Control-Allow-Origin', '*');
     console.log(req.body);
-    addNewTask(req.body);
-    res.json(board);
-  }, 3000);
+    var savedTask = addNewTask(req.body);
+    console.log(savedTask);
+    res.json(savedTask);
+  }, 100);
 });
 
 module.exports = router;

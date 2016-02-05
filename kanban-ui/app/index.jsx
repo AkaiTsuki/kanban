@@ -13,7 +13,7 @@ import { createStore, applyMiddleware  } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import { Provider } from 'react-redux'
-import KanbanReducer from './reducers/KanbanReducer'
+import RootReducer from './reducers/RootReducer'
 import App from './containers/App.jsx'
 
 
@@ -25,9 +25,9 @@ const initState = {
     inProcess: true,
     done: true
   },
-  isInit: true
+  initialized: false
 };
-const store = createStore(KanbanReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));
+const store = createStore(RootReducer, initState, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 render(
   <Provider store={store}>

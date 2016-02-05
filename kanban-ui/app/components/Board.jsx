@@ -9,13 +9,11 @@ class Board extends Component{
   render() {
     const { board, isLoading, actions } = this.props;
     return (
-      <section className="board fill">
-        <div className="row">
+      <section className="board fill row">
           <Lane laneId="backlog" isLoading={isLoading.backlog} lane={board.backlog} titleBgColor="bg-wet-asphalt" actions={actions} />
           <Lane laneId="open" isLoading={isLoading.open} lane={board.open} titleBgColor="bg-turquoise" actions={actions} />
           <Lane laneId="processing" isLoading={isLoading.processing} lane={board.processing} titleBgColor="bg-peter-river" actions={actions} />
           <Lane laneId="done" isLoading={isLoading.done} lane={board.done} titleBgColor="bg-emerald" actions={actions} />
-        </div>
       </section>
     );
   }
