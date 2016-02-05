@@ -1,5 +1,11 @@
-export const ADD_TASK="ADD_TASK";
+
 export const DELETE_TASK="DELETE_TASK";
 export const UPDATE_TASK="UPDATE_TASK";
 export const REQUEST_DATA="REQUEST_DATA";
 export const RECEIVE_DATA="RECEIVE_DATA";
+
+export const REQUEST_BOARD="REQUEST_BOARD";
+export const RECEIVE_BOARD="RECEIVE_BOARD";
+
+export const REQ_ADD_TASK="REQ_ADD_TASK";
+export const RES_ADD_TASK="RES_ADD_TASK";

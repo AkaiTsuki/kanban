@@ -1,15 +1,19 @@
 import * as ActionType from '../constants/KanbanActionType';
 import fetch from 'isomorphic-fetch';
 
-/**
-* Add a new task to the target lane
-*/
-export function addTask(target){
+export function requestAddTask(target) {
   return {
-    type: ActionType.ADD_TASK,
-    task: "New Task",
-    target: target
-  };
+    type: ActionType.REQ_ADD_TASK,
+    target
+  }
+}
+
+export function responseAddTask(json, target){
+  return {
+    type: ActionType.RES_ADD_TASK,
+    target,
+    json
+  }
 }
 
 export function deleteTask(target, id) {
@@ -29,34 +33,34 @@ export function updateTask(target, id, job){
   };
 }
 
-export function requestData(){
+export function requestBoard(){
   return {
-    type: ActionType.REQUEST_DATA
+    type: ActionType.REQUEST_BOARD
   };
 }
 
-export function receiveData(json){
+export function receiveBoard(json){
   return {
-    type: ActionType.RECEIVE_DATA,
+    type: ActionType.RECEIVE_BOARD,
     json
   }
 }
 
-export function fetchData(){
+export function loadBoard(){
   return (dispatch,state) => {
-    dispatch(requestData());
-    return fetch('http://localhost:3000/api/board').then(req => req.json()).then(json => dispatch(receiveData(json)));
+    dispatch(requestBoard());
+    return fetch('http://localhost:3000/api/board').then(req => req.json()).then(json => dispatch(receiveBoard(json)));
   };
 }
 
 export function createTask(laneId){
   return (dispatch, state) => {
-    dispatch(requestData());
+    dispatch(requestAddTask(laneId));
     var body = JSON.stringify({target: laneId, task: {job: "new job"}});
     var headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    return fetch('http://localhost:3000/api/board', {method: 'POST', headers: headers, body: body}).then(res=>res.json()).then(json=>dispatch(receiveData(json)));
+    return fetch('http://localhost:3000/api/board', {method: 'POST', headers: headers, body: body}).then(res=>res.json()).then(json=>dispatch(responseAddTask(json, laneId)));
   };
 }

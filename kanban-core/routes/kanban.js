@@ -25,8 +25,8 @@ var board = {
       }
     ]
   },
-  inProcess: {
-    title: "In Process",
+  processing: {
+    title: "Processing",
     tasks: [
       {
         id: uuid.v4(),
@@ -45,24 +45,28 @@ var board = {
   }
 };
 
+function addNewTask(req){
+  var newTask = req.task;
+  newTask.id = uuid.v4();
+  var target = req.target;
+  board[target].tasks.unshift(newTask);
+}
 
 /* GET users listing. */
 router.get('/board', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   setTimeout(function(){
       res.json(board);
-  }, 3000);
+  }, 5000);
 });
 
 router.post('/board', function(req, res, next){
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  console.log(req.body);
-  var newTask = req.body.task;
-  newTask.id = uuid.v4();
-  var target = req.body.target;
-  board[target].tasks.push(newTask);
+
   setTimeout(function(){
-      res.json(board);
+    console.log(req.body);
+    addNewTask(req.body);
+    res.json(board);
   }, 3000);
 });
 

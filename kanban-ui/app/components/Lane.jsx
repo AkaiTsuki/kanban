@@ -14,7 +14,7 @@ class Lane extends Component{
           <h3 className={'lane-title ' + titleBgColor}>
             {this.renderLoading()}
             {lane.title}
-            <span onClick={this.addNewTask} className="glyphicon glyphicon-plus pull-right"></span>
+            {this.renderAddIcon()}
           </h3>
           {this.renderTaskList()}
         </div>
@@ -37,6 +37,11 @@ class Lane extends Component{
   renderLoading = () => {
     const {isLoading} = this.props;
     return (<i className={isLoading? "fa fa-spinner fa-spin pull-left" : 'hidden'}></i>)
+  };
+
+  renderAddIcon = () => {
+      const {isLoading} = this.props;
+      return (<span onClick={this.addNewTask} className={isLoading ? "hidden" : "glyphicon glyphicon-plus pull-right"}></span>)
   };
 }
 

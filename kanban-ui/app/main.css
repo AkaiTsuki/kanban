@@ -62,6 +62,7 @@ html, body {
 
 .task-content{
     padding-bottom: 5px;
+    min-height: 70px;
 }
 
 .task-tool-bar{
@@ -72,4 +73,31 @@ html, body {
 
 .task-tool-bar span:hover{
   cursor: pointer;
+}
+
+.cover {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+.cover .content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cover .content .top{
+  min-height: 200px;
+}
+
+.cover .content .middle{
+  color: #777;
+}
+
+.cover .content .load-icon{
+  font-size: 80px
 }
