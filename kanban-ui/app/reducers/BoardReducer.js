@@ -1,4 +1,4 @@
-import { DELETE_TASK, UPDATE_TASK,RECEIVE_ADD_TASK,RECEIVE_BOARD, RECEIVE_UPDATE_TASK,RECEIVE_DELETE_TASK } from '../constants/KanbanActionType';
+import { RECEIVE_ADD_TASK,RECEIVE_BOARD, RECEIVE_UPDATE_TASK,RECEIVE_DELETE_TASK } from '../constants/KanbanActionType';
 
 function addTask(state, task, target){
   var board = Object.assign({}, state);
@@ -28,10 +28,6 @@ function updateTask(state, updatedTask, target){
 
 const boardReducer = (state = {}, action) => {
   switch (action.type) {
-    case DELETE_TASK:
-      return deleteTaskFromTargetLane(state, action.target, action.id);
-    case UPDATE_TASK:
-      return updateTask(state, action.target, action.id, action.job);
     case RECEIVE_BOARD:
       return action.json
     case RECEIVE_ADD_TASK:
