@@ -82,7 +82,7 @@ router.get('/board', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   setTimeout(function(){
       res.json(board);
-  }, 100);
+  }, 3000);
 });
 
 router.post('/board', function(req, res, next){
@@ -92,7 +92,7 @@ router.post('/board', function(req, res, next){
     var savedTask = addNewTask(req.body);
     console.log(savedTask);
     res.json(savedTask);
-  }, 100);
+  }, 2000);
 });
 
 router.put('/board', function(req, res, next){
@@ -101,7 +101,7 @@ router.put('/board', function(req, res, next){
     console.log(req.body);
     var updatedTask = updateTask(req.body);
     res.json(updatedTask);
-  }, 100);
+  }, 2000);
 });
 
 router.delete('/board', function(req, res, next){
@@ -110,7 +110,7 @@ router.delete('/board', function(req, res, next){
     console.log(req.body);
     var id = deleteTask(req.body);
     res.json({id: id});
-  }, 100);
+  }, 2000);
 });
 
 
