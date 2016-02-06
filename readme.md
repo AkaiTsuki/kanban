@@ -21,13 +21,10 @@ cd kanban-ui
 npm install
 npm start
 ```
-use IE Browser: http://localhost:8080
+Do not use IE Browser, access http://localhost/8080
 If cannot see home page:
 ```
 set PORT=9000
 npm start
 ```
 Then http://localhost:9000
-
-If use Chrome Browser, need to install chrome plugin to enable cross site access:
-https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
