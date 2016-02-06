@@ -53,6 +53,30 @@ function addNewTask(req){
   return newTask;
 }
 
+function updateTask(payload){
+  var target = payload.target;
+  var updatedTask;
+  board[target].tasks = board[target].tasks.map(function(task){
+    if(task.id === payload.id){
+      updatedTask = {
+        id: task.id,
+        job: payload.text
+      };
+      return updatedTask;
+    } else {
+      return task;
+    }
+  });
+  return updatedTask;
+}
+
+function deleteTask(payload){
+  board[payload.target].tasks = board[payload.target].tasks.filter(function(task){
+    return task.id !== payload.taskId;
+  });
+  return payload.taskId;
+}
+
 /* GET users listing. */
 router.get('/board', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -70,5 +94,24 @@ router.post('/board', function(req, res, next){
     res.json(savedTask);
   }, 100);
 });
+
+router.put('/board', function(req, res, next){
+  setTimeout(function(){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    console.log(req.body);
+    var updatedTask = updateTask(req.body);
+    res.json(updatedTask);
+  }, 100);
+});
+
+router.delete('/board', function(req, res, next){
+  setTimeout(function(){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    console.log(req.body);
+    var id = deleteTask(req.body);
+    res.json({id: id});
+  }, 100);
+});
+
 
 module.exports = router;

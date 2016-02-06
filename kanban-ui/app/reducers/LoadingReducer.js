@@ -1,4 +1,4 @@
-import { REQUEST_ADD_TASK, REQUEST_BOARD, RECEIVE_BOARD, RECEIVE_ADD_TASK} from '../constants/KanbanActionType';
+import { REQUEST_ADD_TASK, REQUEST_BOARD, RECEIVE_BOARD, RECEIVE_ADD_TASK, REQUEST_UPDATE_TASK, RECEIVE_UPDATE_TASK, REQUEST_DELETE_TASK,RECEIVE_DELETE_TASK} from '../constants/KanbanActionType';
 
 const initLoadingState = {
   backlog: false,
@@ -10,6 +10,8 @@ const initLoadingState = {
 export default function loadingReducer(state = initLoadingState, action){
 
   switch (action.type) {
+    case REQUEST_UPDATE_TASK:
+    case REQUEST_DELETE_TASK:
     case REQUEST_ADD_TASK:
       return Object.assign({}, state, {
         [action.target]: true
@@ -28,6 +30,8 @@ export default function loadingReducer(state = initLoadingState, action){
         processing: false,
         done: false
       });
+    case RECEIVE_UPDATE_TASK:
+    case RECEIVE_DELETE_TASK:
     case RECEIVE_ADD_TASK:
       return Object.assign({}, state, {
         [action.target]: false

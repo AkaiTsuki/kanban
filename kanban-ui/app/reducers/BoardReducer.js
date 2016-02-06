@@ -1,4 +1,4 @@
-import { DELETE_TASK, UPDATE_TASK,RECEIVE_ADD_TASK,RECEIVE_BOARD } from '../constants/KanbanActionType';
+import { DELETE_TASK, UPDATE_TASK,RECEIVE_ADD_TASK,RECEIVE_BOARD, RECEIVE_UPDATE_TASK,RECEIVE_DELETE_TASK } from '../constants/KanbanActionType';
 
 function addTask(state, task, target){
   var board = Object.assign({}, state);
@@ -7,21 +7,18 @@ function addTask(state, task, target){
   return board;
 }
 
-function deleteTaskFromTargetLane(state, target, id){
+function deleteTask(state, payload, target){
   var board = Object.assign({}, state);
-  board[target].tasks = board[target].tasks.filter(task => task.id !== id);
+  board[target].tasks = board[target].tasks.filter(task => task.id !== payload.id);
 
   return board;
 }
 
-function updateTask(state, target, id, job){
+function updateTask(state, updatedTask, target){
   var board = Object.assign({}, state);
   board[target].tasks = board[target].tasks.map(task => {
-    if(task.id === id) {
-      return {
-        id: task.id,
-        job
-      }
+    if(task.id === updatedTask.id) {
+      return updatedTask
     } else {
       return task;
     }
@@ -39,6 +36,10 @@ const boardReducer = (state = {}, action) => {
       return action.json
     case RECEIVE_ADD_TASK:
       return addTask(state, action.json, action.target);
+    case RECEIVE_UPDATE_TASK:
+      return updateTask(state, action.json, action.target);
+    case RECEIVE_DELETE_TASK:
+      return deleteTask(state, action.json, action.target);
     default:
       return state;
   }

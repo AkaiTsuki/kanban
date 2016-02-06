@@ -16,23 +16,6 @@ export function responseAddTask(json, target){
   }
 }
 
-export function deleteTask(target, id) {
-  return {
-    type: ActionType.DELETE_TASK,
-    target: target,
-    id
-  };
-}
-
-export function updateTask(target, id, job){
-  return {
-    type: ActionType.UPDATE_TASK,
-    target,
-    id,
-    job
-  };
-}
-
 export function requestBoard(){
   return {
     type: ActionType.REQUEST_BOARD
@@ -43,6 +26,38 @@ export function receiveBoard(json){
   return {
     type: ActionType.RECEIVE_BOARD,
     json
+  }
+}
+
+export function requestUpdateTask(laneId, taskId){
+  return {
+    type: ActionType.REQUEST_UPDATE_TASK,
+    target: laneId,
+    id: taskId
+  }
+}
+
+export function responseUpdateTask(json, target){
+  return {
+    type: ActionType.RECEIVE_UPDATE_TASK,
+    target,
+    json
+  }
+}
+
+export function requestDeleteTask(target, id){
+  return {
+    type: ActionType.REQUEST_DELETE_TASK,
+    target,
+    id
+  }
+}
+
+export function responseDeleteTask(json, target){
+  return {
+    type: ActionType.RECEIVE_DELETE_TASK,
+    json,
+    target
   }
 }
 
@@ -65,9 +80,26 @@ export function createTask(laneId){
   };
 }
 
-// export function updateTask(laneId, taskId, text){
-//   return (dispatch, state) => {
-//     dispatch(requestUpdateTask(laneId, taskId));
-//
-//   }
-// }
+export function updateTask(laneId, taskId, text){
+  return (dispatch, state) => {
+    dispatch(requestUpdateTask(laneId, taskId));
+    var body = JSON.stringify({id: taskId, target: laneId, text: text});
+    var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    };
+    return fetch('http://localhost:3000/api/board', {method: 'PUT', headers: headers, body: body}).then(res=>res.json()).then(json=>dispatch(responseUpdateTask(json, laneId)));
+  }
+}
+
+export function deleteTask(laneId, taskId){
+  return (dispatch, state)=>{
+    dispatch(requestDeleteTask(laneId, taskId));
+    var body = JSON.stringify({target: laneId, taskId});
+    var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    };
+    return fetch('http://localhost:3000/api/board', {method: 'DELETE', headers: headers, body: body}).then(res=>res.json()).then(json=>dispatch(responseDeleteTask(json, laneId)));
+  };
+}
