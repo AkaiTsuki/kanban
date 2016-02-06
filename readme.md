@@ -15,16 +15,23 @@ npm start
 ```
 
 ### Start webpack-dev-server
+on windows 10 or MacOS
 ```
 From project directory:
 cd kanban-ui
 npm install
 npm start
 ```
-Do not use IE Browser, access http://localhost/8080
-If cannot see home page:
+Open browser http://localhost/8080
+
+on windows 7
 ```
+From project directory:
+cd kanban-ui
+npm install
+
 set PORT=9000
 npm start
 ```
-Then http://localhost:9000
+Open browser(No IE support) http://localhost:9000
+
